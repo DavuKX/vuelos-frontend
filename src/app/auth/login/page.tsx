@@ -1,8 +1,23 @@
-import React from 'react';
+'use client';
+
+import React, {useEffect} from 'react';
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import {login} from "@/actions/auth";
+import {toast} from "react-toastify";
+import {redirect} from "next/navigation";
+import {router} from "next/client";
 
 const LoginPage = () => {
+    const [state, action] = React.useActionState(login, undefined);
+
+    useEffect(() => {
+        if (state?.success) {
+            toast.success("Inicio de sesión exitoso");
+            redirect("/dashboard");
+        }
+    }, [state?.success, router]);
+
     return (
         <div className="bg-gray-50 font-[sans-serif]">
             <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -10,30 +25,33 @@ const LoginPage = () => {
 
                     <div className="p-8 rounded-2xl bg-white shadow">
                         <h2 className="text-gray-800 text-center text-2xl font-bold">Sign In</h2>
-                        <form className="mt-8 space-y-4">
+                        <form className="mt-8 space-y-4" action={action}>
                             <div>
                                 <label className="text-gray-800 text-sm mb-2 block">Usuario</label>
                                 <div className="relative flex items-center">
-                                    <input name="username" type="text" required
-                                           className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-                                           placeholder="Ingrese usuario"/>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb"
-                                         className="w-4 h-4 absolute right-4" viewBox="0 0 24 24">
-                                        <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
-                                        <path
-                                            d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
-                                            data-original="#000000"></path>
-                                    </svg>
+                                    <input
+                                        name="username"
+                                        type="text"
+                                        required
+                                        className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                       placeholder="Ingrese usuario"
+                                    />
                                 </div>
+                                {state?.errors?.username && <p className='text-red-500'>{state.errors.username}</p>}
                             </div>
 
                             <div>
                                 <label className="text-gray-800 text-sm mb-2 block">Contraseña</label>
                                 <div className="relative flex items-center">
-                                    <input name="password" type="password" required
-                                           className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
-                                           placeholder="Ingrese contraseña"/>
+                                    <input
+                                        name="password"
+                                        type="password"
+                                        required
+                                        className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                        placeholder="Ingrese contraseña"
+                                    />
                                 </div>
+                                {state?.errors?.password && <p className='text-red-500'>{state.errors.password}</p>}
                             </div>
 
                             <div className="!mt-8">

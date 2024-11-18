@@ -37,3 +37,18 @@ export type FormState =
     message?: string
 }
     | undefined
+
+export const LoginFormSchema = z.object({
+    username: z.string(),
+    password: z.string(),
+})
+
+export type LoginFormState =
+    | {
+    errors?: {
+        username?: string[]
+        password?: string[]
+    }
+    message?: string
+}
+    | undefined
