@@ -6,6 +6,7 @@ export interface Vuelo {
     fechaSalidaVuelo: string;
     horaSalidaVuelo: string;
     duracionMinutosVuelo: number;
+    precioVuelo: number;
     countPasajeros: number;
     countReservas: number;
     capacidadVuelo: number;

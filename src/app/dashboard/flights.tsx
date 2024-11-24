@@ -2,6 +2,7 @@ import React from 'react';
 import {Vuelo} from "@/interfaces/Vuelo";
 import {Button, Card, Divider} from "@mui/material";
 import moment from "moment";
+import {parseToCurrency} from "@/lib/utils";
 
 interface FlightsProps {
     flights: Vuelo[];
@@ -21,7 +22,7 @@ const Flights = ({ flights }: FlightsProps) => {
                     <p className="text-lg text-gray-950 font-semibold">Llegada: {moment(flight.horaSalidaVuelo, "HH:mm:ss").add(flight.duracionMinutosVuelo, 'minutes').format('HH:mm')}</p>
                     <Divider />
                     <h5 className="text-xs mt-4">Precio</h5>
-                    <p className="text-lg text-gray-950 font-semibold mb-4">$100,300</p>
+                    <p className="text-lg text-gray-950 font-semibold mb-4">{parseToCurrency(flight.precioVuelo)}</p>
                     <Button variant="contained" color="secondary" className="w-full">Reservar</Button>
                 </Card>
             ))}
