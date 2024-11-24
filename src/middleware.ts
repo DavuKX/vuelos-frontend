@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import {getCookie} from "@/lib/cookieUtils";
+import {cookies} from "next/headers";
 
-export function middleware(request: NextRequest) {
-    /*if (!getCookie('authToken')) {
+export async function middleware(request: NextRequest) {
+    const token = (await cookies()).get('authToken');
+
+    if (!token) {
         return NextResponse.redirect(new URL('/auth/login', request.url))
-    }*/
+    }
 
     if (request.nextUrl.pathname === '/') {
         return NextResponse.redirect(new URL('/dashboard', request.url))

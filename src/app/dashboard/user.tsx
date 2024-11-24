@@ -1,3 +1,4 @@
+'use client';
 import {Button} from '@/components/ui/button';
 import Image from 'next/image';
 import {
@@ -9,9 +10,11 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
+import {signOut} from "@/actions/auth";
+import {getCookie} from "@/lib/cookieUtils";
 
-export async function User() {
-    let user = null;
+export function User() {
+    const user = getCookie('authUsername');
 
     return (
         <div className="relative ml-auto flex-1 md:grow-0">
@@ -31,19 +34,13 @@ export async function User() {
                         />
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuContent align="end" className="bg-white">
+                    <DropdownMenuLabel>{user ? user : 'My Account'}</DropdownMenuLabel>
                     <DropdownMenuSeparator/>
                     <DropdownMenuSeparator/>
                     {user ? (
                         <DropdownMenuItem>
-                            <form
-                                action={async () => {
-                                    'use server';
-                                }}
-                            >
-                                <button type="submit">Sign Out</button>
-                            </form>
+                            <button onClick={signOut}>Sign Out</button>
                         </DropdownMenuItem>
                     ) : (
                         <DropdownMenuItem>

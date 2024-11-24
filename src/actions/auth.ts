@@ -2,7 +2,8 @@ import {SignupFormSchema, FormState, LoginFormState, LoginFormSchema} from "@/li
 import axiosInstance from "@/services/axiosInstance";
 import {AxiosError} from "axios";
 import {toast} from "react-toastify";
-import {getCookie, setCookie} from "@/lib/cookieUtils";
+import {clearCookies, getCookie, setCookie} from "@/lib/cookieUtils";
+import {redirect} from "next/navigation";
 
 export async function signup(state: FormState, formData: FormData) {
     const validatedFields = SignupFormSchema.safeParse({
@@ -70,8 +71,6 @@ export async function login(state: LoginFormState, formData: FormData) {
         setCookie('authUsername', username);
         setCookie('authRoles', JSON.stringify(roles));
 
-        console.log(getCookie('authToken'));
-
         return {
             success: true,
             data: response.data,
@@ -90,4 +89,10 @@ export async function login(state: LoginFormState, formData: FormData) {
             errors: 'An error occurred. Please try again.',
         };
     }
+}
+
+export function signOut() {
+    clearCookies();
+
+    redirect('/auth/login');
 }

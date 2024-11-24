@@ -16,7 +16,6 @@ export const removeCookie = (key: string) => {
 
 export const clearCookies = () => {
     Cookies.remove('authToken');
-    Cookies.remove('authType');
     Cookies.remove('authUsername');
     Cookies.remove('authRoles');
 };

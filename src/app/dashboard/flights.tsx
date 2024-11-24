@@ -3,6 +3,7 @@ import {Vuelo} from "@/interfaces/Vuelo";
 import {Button, Card, Divider} from "@mui/material";
 import moment from "moment";
 import {parseToCurrency} from "@/lib/utils";
+import {getCookie} from "@/lib/cookieUtils";
 
 interface FlightsProps {
     flights: Vuelo[];
