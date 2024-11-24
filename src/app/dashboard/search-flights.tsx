@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Card, FormControl, TextField} from "@mui/material";
 import {DatePicker} from "@mui/x-date-pickers";
 import {Search} from "lucide-react";
 import {Filter} from "@/app/dashboard/page";
+import moment, {Moment} from "moment";
 
 interface SearchFlightsProps {
     onDataChange: (filter: Filter) => void;
@@ -14,18 +15,20 @@ interface SearchFlightsProps {
 const SearchFlights = ({ onDataChange, onSearch }: SearchFlightsProps) => {
     const [filter, setFilter] = React.useState({
         origin: '',
-        destiny: '',
-        date: '',
+        destination: '',
+        date: moment(),
         passengers: 1
     });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    useEffect(() => {
+        onDataChange(filter);
+    }, [filter, onDataChange]);
+
+    const handleChange = (key: string, value: string | Moment | null) => {
         setFilter({
             ...filter,
-            [event.target.id]: event.target.value
+            [key]: value
         });
-
-        onDataChange(filter);
     };
 
     return (
@@ -40,24 +43,26 @@ const SearchFlights = ({ onDataChange, onSearch }: SearchFlightsProps) => {
                         label="Origen"
                         variant="outlined"
                         size="small"
-                        onChange={handleChange}
+                        onChange={(e) => handleChange('origin', e.target.value)}
                         value={filter.origin}
                     />
                 </FormControl>
                 <FormControl className="col-span-1">
                     <TextField
-                        id="destiny"
+                        id="destination"
                         label="Destino"
                         variant="outlined"
                         size="small"
-                        onChange={handleChange}
-                        value={filter.destiny}
+                        onChange={(e) => handleChange('destination', e.target.value)}
+                        value={filter.destination}
                     />
                 </FormControl>
                 <FormControl className="col-span-1">
                     <DatePicker
                         label="Fecha"
                         slotProps={{ textField: { size: 'small'}}}
+                        value={moment(filter.date)}
+                        onChange={(date) => handleChange('date', date)}
                     />
                 </FormControl>
                 <FormControl className="col-span-1">
@@ -67,7 +72,7 @@ const SearchFlights = ({ onDataChange, onSearch }: SearchFlightsProps) => {
                         variant="outlined"
                         size="small"
                         type="number"
-                        onChange={handleChange}
+                        onChange={(e) => handleChange('passengers', e.target.value)}
                         value={filter.passengers}
                     />
                 </FormControl>

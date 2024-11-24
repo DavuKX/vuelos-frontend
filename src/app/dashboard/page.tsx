@@ -1,34 +1,64 @@
 'use client';
 import SearchFlights from "@/app/dashboard/search-flights";
+import moment, {Moment} from "moment";
+import axiosInstance from "@/services/axiosInstance";
+import {toast} from "react-toastify";
+import {Vuelo} from "@/interfaces/Vuelo";
+import {useEffect, useState} from "react";
+import Flights from "@/app/dashboard/flights";
 export interface Filter {
     origin: string;
-    destiny: string;
-    date: string;
+    destination: string;
+    date: Moment | null;
     passengers: number;
 }
 
 export default function HomePage() {
+    const [flights, setFlights] = useState<Vuelo[]>([]);
+
     const filters: Filter = {
         origin: '',
-        destiny: '',
-        date: '',
+        destination: '',
+        date: moment(),
         passengers: 1
     };
 
+    useEffect(() => {
+        loadFlights().then(() => console.log('Flights loaded'));
+    }, []);
+
+    const loadFlights = async () => {
+        const response: any = await axiosInstance.get('/vuelos', {
+            params: {
+                origin: filters.origin,
+                destination: filters.destination,
+                date: filters.date?.format('YYYY-MM-DD'),
+                passengers: filters.passengers
+            }
+        });
+        setFlights(response.data);
+    }
+
     const onDataChange = (filter: Filter) => {
         filters.origin = filter.origin;
-        filters.destiny = filter.destiny;
+        filters.destination = filter.destination;
         filters.date = filter.date;
         filters.passengers = filter.passengers;
     }
 
     const onSearch = async () => {
-        console.log(filters);
+        if (!filters.origin || !filters.destination || !filters.date) {
+            toast.error('Por favor, complete todos los campos');
+            return;
+        }
+
+        await loadFlights();
     }
 
     return (
         <>
             <SearchFlights onDataChange={onDataChange} onSearch={onSearch} />
+            <Flights flights={flights} />
         </>
     );
 }
