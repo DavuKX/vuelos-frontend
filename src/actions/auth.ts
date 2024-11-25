@@ -17,6 +17,11 @@ export async function signup(state: FormState, formData: FormData) {
         email: formData.get("email"),
         password: formData.get("password"),
         confirmPassword: formData.get("confirm_password"),
+        name: formData.get("name"),
+        lastName: formData.get("lastName"),
+        identification: formData.get("identification"),
+        address: formData.get("address"),
+        phone: formData.get("phone"),
     });
 
     if (!validatedFields.success) {
@@ -31,6 +36,11 @@ export async function signup(state: FormState, formData: FormData) {
             username: formData.get("username"),
             email: formData.get("email"),
             password: formData.get("password"),
+            nombreCliente: formData.get("name"),
+            apellidoCliente: formData.get("lastName"),
+            direccionCliente: formData.get("address"),
+            telefonoCliente: formData.get("phone"),
+            documentoIdentidad: formData.get("identification"),
         });
 
         return {

@@ -1,12 +1,12 @@
 'use client';
 
-import React, {useEffect, useState} from 'react';
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { signup } from "@/actions/auth";
-import {toast} from "react-toastify";
-import {router} from "next/client";
-import {redirect} from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { router } from "next/client";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import React, { useEffect, useState } from 'react';
+import { toast } from "react-toastify";
 
 const Page = () => {
     const [state, action] = React.useActionState(signup, undefined);
@@ -20,6 +20,11 @@ const Page = () => {
 
     const [formData, setFormData] = useState({
         username: '',
+        name: '',
+        lastName: '',
+        identification: '',
+        address: '',
+        phone: '',
         email: '',
         password: '',
         confirm_password: ''
@@ -54,6 +59,81 @@ const Page = () => {
                                     />
                                 </div>
                                 {state?.errors?.username && <p className='text-red-500'>{state.errors.username}</p>}
+                            </div>
+                            <div>
+                                <label className="text-gray-800 text-sm mb-2 block">Nombre</label>
+                                <div className="relative flex items-center">
+                                    <input
+                                        name="name"
+                                        type="text"
+                                        value={formData.name}
+                                        onChange={handleInputChange}
+                                        required
+                                        className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                        placeholder="Ingrese Nombre"
+                                    />
+                                </div>
+                                {state?.errors?.name && <p className='text-red-500'>{state.errors.name}</p>}
+                            </div>
+                            <div>
+                                <label className="text-gray-800 text-sm mb-2 block">Apellido</label>
+                                <div className="relative flex items-center">
+                                    <input
+                                        name="lastName"
+                                        type="text"
+                                        value={formData.lastName}
+                                        onChange={handleInputChange}
+                                        required
+                                        className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                        placeholder="Ingrese Apellido"
+                                    />
+                                </div>
+                                {state?.errors?.lastName && <p className='text-red-500'>{state.errors.lastName}</p>}
+                            </div>
+                            <div>
+                                <label className="text-gray-800 text-sm mb-2 block">Cedula</label>
+                                <div className="relative flex items-center">
+                                    <input
+                                        name="identification"
+                                        type="text"
+                                        value={formData.identification}
+                                        onChange={handleInputChange}
+                                        required
+                                        className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                        placeholder="Ingrese Cedula"
+                                    />
+                                </div>
+                                {state?.errors?.identification && <p className='text-red-500'>{state.errors.identification}</p>}
+                            </div>
+                            <div>
+                                <label className="text-gray-800 text-sm mb-2 block">Dirección</label>
+                                <div className="relative flex items-center">
+                                    <input
+                                        name="address"
+                                        type="text"
+                                        value={formData.address}
+                                        onChange={handleInputChange}
+                                        required
+                                        className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                        placeholder="Ingrese Direcciíon"
+                                    />
+                                </div>
+                                {state?.errors?.address && <p className='text-red-500'>{state.errors.address}</p>}
+                            </div>
+                            <div>
+                                <label className="text-gray-800 text-sm mb-2 block">Telefono</label>
+                                <div className="relative flex items-center">
+                                    <input
+                                        name="phone"
+                                        type="text"
+                                        value={formData.phone}
+                                        onChange={handleInputChange}
+                                        required
+                                        className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                        placeholder="Ingrese Telefono"
+                                    />
+                                </div>
+                                {state?.errors?.phone && <p className='text-red-500'>{state.errors.phone}</p>}
                             </div>
                             <div>
                                 <label className="text-gray-800 text-sm mb-2 block">Email</label>
