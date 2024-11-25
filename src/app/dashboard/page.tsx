@@ -1,11 +1,11 @@
 'use client';
-import SearchFlights from "@/app/dashboard/search-flights";
-import moment, {Moment} from "moment";
-import axiosInstance from "@/services/axiosInstance";
-import {toast} from "react-toastify";
-import {Vuelo} from "@/interfaces/Vuelo";
-import {useEffect, useState} from "react";
 import Flights from "@/app/dashboard/flights";
+import SearchFlights from "@/app/dashboard/search-flights";
+import { Vuelo } from "@/interfaces/Vuelo";
+import axiosInstance from "@/services/axiosInstance";
+import moment, { Moment } from "moment";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 export interface Filter {
     origin: string;
     destination: string;
@@ -33,7 +33,8 @@ export default function HomePage() {
                 origin: filters.origin,
                 destination: filters.destination,
                 date: filters.date?.format('YYYY-MM-DD'),
-                passengers: filters.passengers
+                passengers: filters.passengers,
+                size: 1000
             }
         });
         setFlights(response.data);

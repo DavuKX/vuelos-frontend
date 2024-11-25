@@ -1,9 +1,8 @@
-import React from 'react';
-import {Vuelo} from "@/interfaces/Vuelo";
-import {Button, Card, Divider} from "@mui/material";
+import { Vuelo } from "@/interfaces/Vuelo";
+import { parseToCurrency } from "@/lib/utils";
+import { Button, Card, Divider } from "@mui/material";
 import moment from "moment";
-import {parseToCurrency} from "@/lib/utils";
-import {redirect} from "next/navigation";
+import { redirect } from "next/navigation";
 
 interface FlightsProps {
     flights: Vuelo[];
@@ -19,6 +18,7 @@ const Flights = ({ flights }: FlightsProps) => {
                     <p className="text-sm text-gray-500 my-2">Por {flight.aerolinea.nombreAerolinea}</p>
                     <Divider />
                     <h5 className="text-xs mt-4">Horario</h5>
+                    <p className="text-lg text-gray-950 font-semibold">Fecha: {moment(flight.fechaSalidaVuelo, "yyyy:MM:dd").locale('es').format('ll')}</p>
                     <p className="text-lg text-gray-950 font-semibold">Salida: {moment(flight.horaSalidaVuelo, "HH:mm:ss").format('HH:mm')}</p>
                     <p className="text-lg text-gray-950 font-semibold">Llegada: {moment(flight.horaSalidaVuelo, "HH:mm:ss").add(flight.duracionMinutosVuelo, 'minutes').format('HH:mm')}</p>
                     <Divider />

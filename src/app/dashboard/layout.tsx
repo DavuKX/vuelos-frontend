@@ -1,16 +1,16 @@
-import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
     Home,
     Package2,
     PanelLeft,
     ShoppingCart,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { User } from './user';
-import Providers from './providers';
-import { NavItem } from './nav-item';
+import Link from 'next/link';
 import React from "react";
+import { NavItem } from './nav-item';
+import Providers from './providers';
+import { User } from './user';
 
 export default function DashboardLayout({
                                             children
@@ -47,7 +47,7 @@ function DesktopNav() {
                     <span className="sr-only">Dashboard</span>
                 </Link>
 
-                <NavItem href="#" label="Orders">
+                <NavItem href="/reservations" label="Orders">
                     <ShoppingCart className="h-5 w-5" />
                 </NavItem>
             </nav>
