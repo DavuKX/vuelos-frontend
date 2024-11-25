@@ -69,7 +69,7 @@ export default function AdminAirportsPage() {
   return (
     <Container maxWidth="lg">
       <Typography variant="h4" component="h2" gutterBottom>
-        Gestión de Aeropuertos
+        Gestión de aeropuertos
       </Typography>
 
       <div className="flex gap-4 mb-4">
