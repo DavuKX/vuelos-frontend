@@ -23,25 +23,29 @@ const FlightTable = ({ flights, onEdit, onDelete }: FlightTableProps) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Origen</TableCell>
-            <TableCell>Destino</TableCell>
-            <TableCell>Fecha</TableCell>
-            <TableCell>Hora</TableCell>
-            <TableCell>Precio</TableCell>
-            <TableCell>Acciones</TableCell>
+            <TableCell sx={{ padding: "4px 8px" }}>ID</TableCell>
+            <TableCell sx={{ padding: "4px 8px" }}>Origen</TableCell>
+            <TableCell sx={{ padding: "4px 8px" }}>Destino</TableCell>
+            <TableCell sx={{ padding: "4px 8px" }}>Fecha</TableCell>
+            <TableCell sx={{ padding: "4px 8px" }}>Hora</TableCell>
+            <TableCell sx={{ padding: "4px 8px" }}>Precio</TableCell>
+            <TableCell sx={{ padding: "4px 8px" }}>Acciones</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {flights.map((flight) => (
             <TableRow key={flight.idVuelo}>
-              <TableCell>{flight.idVuelo}</TableCell>
-              <TableCell>{flight.aeropuertoOrigen.nombreAeropuerto}</TableCell>
-              <TableCell>{flight.aeropuertoDestino.nombreAeropuerto}</TableCell>
-              <TableCell>{flight.fechaSalidaVuelo}</TableCell>
-              <TableCell>{flight.horaSalidaVuelo}</TableCell>
-              <TableCell>${flight.precioVuelo}</TableCell>
-              <TableCell>
+              <TableCell sx={{ padding: "4px 8px" }}>{flight.idVuelo}</TableCell>
+              <TableCell sx={{ padding: "4px 8px" }}>
+                {flight.aeropuertoOrigen ? flight.aeropuertoOrigen.nombreAeropuerto : 'Desconocido'}
+              </TableCell>
+              <TableCell sx={{ padding: "4px 8px" }}>
+                {flight.aeropuertoDestino ? flight.aeropuertoDestino.nombreAeropuerto : 'Desconocido'}
+              </TableCell>
+              <TableCell sx={{ padding: "4px 8px" }}>{flight.fechaSalidaVuelo}</TableCell>
+              <TableCell sx={{ padding: "4px 8px" }}>{flight.horaSalidaVuelo}</TableCell>
+              <TableCell sx={{ padding: "4px 8px" }}>{flight.precioVuelo ?? '--'}</TableCell>
+              <TableCell sx={{ padding: "4px 8px" }}>
                 <Button
                   variant="outlined"
                   color="secondary"

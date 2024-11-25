@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axiosInstance from "@/services/axiosInstance";
-import { Button, TextField, Container, Typography } from "@mui/material";
+import { Button, TextField, Container, Typography, Pagination } from "@mui/material";
 import FlightTable from "./flight-table";
 import FlightForm from "./flight-form";
 import { Vuelo } from "@/interfaces/Vuelo";
@@ -12,17 +12,17 @@ export default function AdminFlightsPage() {
   const [searchId, setSearchId] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editingFlight, setEditingFlight] = useState<Vuelo | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(12);
 
+  const paginatedFlights = flights.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+  
   const loadFlights = async () => {
     try {
-      const response = await axiosInstance.get("/vuelos", {
-        params: {
-          origin: '',
-          destination: '',
-          date: "1900-01-01",
-          passengers: 1
-        },
-      });
+      const response = await axiosInstance.get("/vuelos/all");
       setFlights(response.data);
     } catch (error) {
       console.error("Error fetching flights:", error);
@@ -34,16 +34,14 @@ export default function AdminFlightsPage() {
       await loadFlights();
       return;
     }
-  
+
     try {
       const response = await axiosInstance.get(`/vuelos/${searchId}`);
-      console.log(response.data);  // Verifica la estructura de los datos
       setFlights(response.data ? [response.data] : []);
     } catch (error) {
       console.error("Error fetching flight by ID:", error);
     }
   };
-  
 
   const handleEdit = (flight: Vuelo) => {
     setEditingFlight(flight);
@@ -70,6 +68,7 @@ export default function AdminFlightsPage() {
   }, []);
 
   return (
+
     <Container maxWidth="lg" >
       <Typography variant="h4" component="h2" gutterBottom>
         Gestión de vuelos
@@ -91,10 +90,21 @@ export default function AdminFlightsPage() {
       </div>
 
       <FlightTable
-        flights={flights}
+        flights={paginatedFlights}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
+
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "16px" }}>
+        <Pagination
+          count={Math.ceil(flights.length / pageSize)}
+          page={currentPage}
+          onChange={(event, value) => setCurrentPage(value)}
+          color="secondary"
+        />
+      </div>
+
+
 
       {isEditing && (
         <FlightForm
