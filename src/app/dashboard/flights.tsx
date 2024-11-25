@@ -3,7 +3,7 @@ import {Vuelo} from "@/interfaces/Vuelo";
 import {Button, Card, Divider} from "@mui/material";
 import moment from "moment";
 import {parseToCurrency} from "@/lib/utils";
-import {getCookie} from "@/lib/cookieUtils";
+import {redirect} from "next/navigation";
 
 interface FlightsProps {
     flights: Vuelo[];
@@ -24,7 +24,7 @@ const Flights = ({ flights }: FlightsProps) => {
                     <Divider />
                     <h5 className="text-xs mt-4">Precio</h5>
                     <p className="text-lg text-gray-950 font-semibold mb-4">{parseToCurrency(flight.precioVuelo)}</p>
-                    <Button variant="contained" color="secondary" className="w-full">Reservar</Button>
+                    <Button variant="contained" color="secondary" className="w-full" onClick={() => redirect(`flights/${flight.idVuelo}`)}>Reservar</Button>
                 </Card>
             ))}
         </div>
