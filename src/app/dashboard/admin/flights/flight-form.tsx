@@ -66,79 +66,80 @@ const FlightForm = ({ flight, onClose, onSubmit }: FlightFormProps) => {
   return (
     <Dialog open onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
-        {flight ? "Editar Vuelo" : "Crear Vuelo"}
+        {flight ? "Editar vuelo" : "Crear vuelo"}
       </DialogTitle>
-      <DialogContent>
-        <TextField
-          fullWidth
-          label="Fecha de Salida"
-          type="date"
-          value={formData.fechaSalidaVuelo}
-          onChange={handleChange("fechaSalidaVuelo")}
-          className="mb-4"
-          InputLabelProps={{ shrink: true }}
+      <DialogContent className="mt-2">
+      <TextField
+        fullWidth
+        label="Fecha de Salida"
+        type="date"
+        value={formData.fechaSalidaVuelo}
+        onChange={handleChange("fechaSalidaVuelo")}
+        sx={{ marginBottom: "10px", marginTop: "8px" }}
+        InputLabelProps={{ shrink: true }}
         />
-        <TextField
-          fullWidth
-          label="Hora de Salida"
-          type="time"
-          value={formData.horaSalidaVuelo}
-          onChange={handleChange("horaSalidaVuelo")}
-          className="mb-4"
-          InputLabelProps={{ shrink: true }}
+      <TextField
+        fullWidth
+        label="Hora de Salida"
+        type="time"
+        value={formData.horaSalidaVuelo}
+        onChange={handleChange("horaSalidaVuelo")}
+        sx={{ marginBottom: "16px" }}
+        InputLabelProps={{ shrink: true }}
         />
-        <TextField
-          fullWidth
-          label="Duración (minutos)"
-          type="number"
-          value={formData.duracionMinutosVuelo}
-          onChange={handleChange("duracionMinutosVuelo")}
-          className="mb-4"
+      <TextField
+        fullWidth
+        label="Duración (minutos)"
+        type="number"
+        value={formData.duracionMinutosVuelo}
+        onChange={handleChange("duracionMinutosVuelo")}
+        sx={{ marginBottom: "16px" }}
         />
-        <TextField
-          fullWidth
-          label="Precio"
-          type="number"
-          value={formData.precioVuelo}
-          onChange={handleChange("precioVuelo")}
-          className="mb-4"
+      <TextField
+        fullWidth
+        label="Precio"
+        type="number"
+        value={formData.precioVuelo}
+        onChange={handleChange("precioVuelo")}
+        sx={{ marginBottom: "16px" }}
         />
-        <TextField
-          fullWidth
-          label="Capacidad"
-          type="number"
-          value={formData.capacidadVuelo}
-          onChange={handleChange("capacidadVuelo")}
-          className="mb-4"
+      <TextField
+        fullWidth
+        label="Capacidad"
+        type="number"
+        value={formData.capacidadVuelo}
+        onChange={handleChange("capacidadVuelo")}
+        sx={{ marginBottom: "16px" }}
         />
-        <TextField
-          fullWidth
-          label="ID Aeropuerto Origen"
-          type="number"
-          value={formData.aeropuertoOrigenId}
-          onChange={handleChange("aeropuertoOrigenId")}
-          className="mb-4"
+      <TextField
+        fullWidth
+        label="ID Aeropuerto Origen"
+        type="number"
+        value={formData.aeropuertoOrigenId}
+        onChange={handleChange("aeropuertoOrigenId")}
+        sx={{ marginBottom: "16px" }}
         />
-        <TextField
-          fullWidth
-          label="ID Aeropuerto Destino"
-          type="number"
-          value={formData.aeropuertoDestinoId}
-          onChange={handleChange("aeropuertoDestinoId")}
-          className="mb-4"
+      <TextField
+        fullWidth
+        label="ID Aeropuerto Destino"
+        type="number"
+        value={formData.aeropuertoDestinoId}
+        onChange={handleChange("aeropuertoDestinoId")}
+        sx={{ marginBottom: "16px" }}
         />
-        <TextField
-          fullWidth
-          label="ID Aerolínea"
-          type="number"
-          value={formData.aerolineaId}
-          onChange={handleChange("aerolineaId")}
-          className="mb-4"
+      <TextField
+        fullWidth
+        label="ID Aerolínea"
+        type="number"
+        value={formData.aerolineaId}
+        onChange={handleChange("aerolineaId")}
+        sx={{ marginBottom: "16px" }}
         />
+
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancelar</Button>
-        <Button onClick={handleSave} variant="contained" color="primary">
+      <DialogActions sx={{ padding: "10px 24px 15px 0"}}>
+        <Button size="small" sx={{ height: "36px", padding: "0 12px" }} color="secondary" onClick={onClose}>Cancelar</Button>
+        <Button size="small" sx={{ height: "36px", padding: "0 12px" }} variant="contained" color="secondary" onClick={handleSave}>
           Guardar
         </Button>
       </DialogActions>
