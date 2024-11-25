@@ -6,10 +6,11 @@ import {
   TableCell, 
   TableHead, 
   TableRow, 
-  Button,
   Paper,
-  TableContainer 
+  TableContainer, 
+  IconButton
 } from "@mui/material";
+import { Trash, Pencil } from "lucide-react";
 
 interface FlightTableProps {
   flights: Vuelo[];
@@ -46,21 +47,12 @@ const FlightTable = ({ flights, onEdit, onDelete }: FlightTableProps) => {
               <TableCell sx={{ padding: "4px 8px" }}>{flight.horaSalidaVuelo}</TableCell>
               <TableCell sx={{ padding: "4px 8px" }}>{flight.precioVuelo ?? '--'}</TableCell>
               <TableCell sx={{ padding: "4px 8px" }}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={() => onEdit(flight)}
-                  className="mr-2"
-                >
-                  Editar
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => onDelete(flight.idVuelo.toString())}
-                >
-                  Eliminar
-                </Button>
+                <IconButton color="secondary" onClick={() => onEdit(flight)} sx={{ padding: "4px", height: "25px", width: "25px"}}>
+                        <Pencil fontSize="small" /> {}
+                </IconButton>
+                <IconButton color="error" onClick={() => onDelete(flight.idVuelo.toString())} sx={{ padding: "4px", height: "25px", width: "25px"}}>
+                        <Trash fontSize="small" /> {}
+                </IconButton>
               </TableCell>
             </TableRow>
           ))}

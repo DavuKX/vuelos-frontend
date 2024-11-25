@@ -76,15 +76,21 @@ export default function AdminFlightsPage() {
 
       <div className="flex gap-4 mb-4">
         <TextField
-          label="Buscar por ID"
-          value={searchId}
-          onChange={(e) => setSearchId(e.target.value)}
-          color="secondary"
+          label="Buscar por ID" value={searchId} onChange={(e) => setSearchId(e.target.value)} color="secondary" size="small"
+          sx={{
+            ".MuiInputLabel-root": {
+              fontSize: "14px",
+              textAlign: "center",
+            },
+            ".MuiInputBase-root": {
+              height: "36px"
+            }
+          }}
         />
-        <Button variant="contained" color="secondary" onClick={handleSearch}>
+        <Button size="small" sx={{ height: "36px", padding: "0 12px" }} variant="contained" color="secondary" onClick={handleSearch}>
           Buscar
         </Button>
-        <Button variant="contained" color="secondary" onClick={() => setIsEditing(true)}>
+        <Button size="small" sx={{ height: "36px", padding: "0 12px" }} variant="contained" color="secondary" onClick={() => setIsEditing(true)}>
           Crear Vuelo
         </Button>
       </div>
