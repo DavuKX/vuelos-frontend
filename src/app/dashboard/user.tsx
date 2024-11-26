@@ -40,11 +40,11 @@ export function User() {
                     <DropdownMenuSeparator/>
                     {user ? (
                         <DropdownMenuItem>
-                            <button onClick={signOut}>Sign Out</button>
+                            <button onClick={signOut}>Cerrar sesión</button>
                         </DropdownMenuItem>
                     ) : (
                         <DropdownMenuItem>
-                            <Link href="auth/login">Sign In</Link>
+                            <Link href="auth/login">Iniciar sesión</Link>
                         </DropdownMenuItem>
                     )}
                 </DropdownMenuContent>

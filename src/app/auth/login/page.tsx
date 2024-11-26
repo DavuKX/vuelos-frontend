@@ -55,7 +55,7 @@ const LoginPage = () => {
                             </div>
 
                             <div className="!mt-8">
-                                <Button type="submit" variant="secondary" className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-black hover:bg-gray-800 focus:outline-none">Sign in</Button>
+                                <Button type="submit" variant="secondary" className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-black hover:bg-gray-800 focus:outline-none">Iniciar Sesión</Button>
                             </div>
                             <p className="text-gray-800 text-sm !mt-8 text-center">¿No tienes una cuenta?
                                 <Link href={"/auth/signup"} className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold"> Regístrate aquí</Link>

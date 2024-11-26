@@ -194,7 +194,7 @@ const Page = () => {
                                     variant="secondary"
                                     className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-black hover:bg-gray-800 focus:outline-none"
                                 >
-                                    Sign Up
+                                    Registrarse
                                 </Button>
                             </div>
                             <p className="text-gray-800 text-sm !mt-8 text-center">¿Ya tienes una cuenta?
