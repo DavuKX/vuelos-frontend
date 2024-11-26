@@ -1,21 +1,25 @@
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import Link from 'next/link';
 import {
     Home,
     Package2,
     PanelLeft,
     ShoppingCart,
+    Plane,
+    Users,
+    Building,
+    UserPlus,
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
-import React from "react";
-import { NavItem } from './nav-item';
-import Providers from './providers';
 import { User } from './user';
+import Providers from './providers';
+import { NavItem } from './nav-item';
+import React from "react";
 
 export default function DashboardLayout({
-                                            children
-                                        }: {
+    children,
+}: {
     children: React.ReactNode;
 }) {
     return (
@@ -49,9 +53,29 @@ async function DesktopNav() {
                     <span className="sr-only">Dashboard</span>
                 </Link>
 
-                <NavItem href="/reservations" label="Orders">
+                <NavItem href="/reservations" label="Ordenes">
                     <ShoppingCart className="h-5 w-5" />
                 </NavItem>
+
+                {admin && (
+                    <>
+                        <NavItem href="/dashboard/admin/airlines" label="Aerolíneas">
+                            <Plane className="h-5 w-5" />
+                        </NavItem>
+                        <NavItem href="/dashboard/admin/airports" label="Aeropuertos">
+                            <Building className="h-5 w-5" />
+                        </NavItem>
+                        <NavItem href="/dashboard/admin/customers" label="Clientes">
+                            <Users className="h-5 w-5" />
+                        </NavItem>
+                        <NavItem href="/dashboard/admin/flights" label="Vuelos">
+                            <Package2 className="h-5 w-5" />
+                        </NavItem>
+                        <NavItem href="/dashboard/admin/passengers" label="Pasajeros">
+                            <UserPlus className="h-5 w-5" />
+                        </NavItem>
+                    </>
+                )}
             </nav>
         </aside>
     );
@@ -83,6 +107,31 @@ async function MobileNav() {
                         <ShoppingCart className="h-5 w-5" />
                         Orders
                     </Link>
+
+                    {admin && (
+                        <>
+                            <Link href="/dashboard/admin/airlines" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+                                <Plane className="h-5 w-5" />
+                                Airlines
+                            </Link>
+                            <Link href="/dashboard/admin/airports" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+                                <Building className="h-5 w-5" />
+                                Airports
+                            </Link>
+                            <Link href="/dashboard/admin/customers" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+                                <Users className="h-5 w-5" />
+                                Customers
+                            </Link>
+                            <Link href="/dashboard/admin/flights" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+                                <Package2 className="h-5 w-5" />
+                                Flights
+                            </Link>
+                            <Link href="/dashboard/admin/passengers" className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+                                <UserPlus className="h-5 w-5" />
+                                Passengers
+                            </Link>
+                        </>
+                    )}
                 </nav>
             </SheetContent>
         </Sheet>
