@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import { Container, Typography, TextField, Button, Pagination } from '@mui/material';
-import axiosInstance from '@/services/axiosInstance';
-import PassengerTable from './passenger-table';
-import PassengerForm from './passenger-form';
 import { Pasajero } from '@/interfaces/Pasajero';
+import axiosInstance from '@/services/axiosInstance';
+import { Button, Container, Pagination, TextField, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import PassengerForm from './passenger-form';
+import PassengerTable from './passenger-table';
 
 export default function AdminPassengersPage() {
   const [passengers, setPassengers] = useState<Pasajero[]>([]);
@@ -38,7 +39,7 @@ export default function AdminPassengersPage() {
       const response = await axiosInstance.get(`/pasajeros/${searchId}`);
       setPassengers(response.data ? [response.data] : []);
     } catch (error) {
-      console.error('Error fetching passenger by ID:', error);
+      toast.error('Pasajero no encontrado');
     }
   };
 
