@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import axiosInstance from "@/services/axiosInstance";
-import { Button, TextField, Container, Typography, Pagination } from "@mui/material";
-import FlightTable from "./flight-table";
-import FlightForm from "./flight-form";
 import { Vuelo } from "@/interfaces/Vuelo";
+import axiosInstance from "@/services/axiosInstance";
+import { Button, Container, Pagination, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from 'react';
+import { toast } from "react-toastify";
+import FlightForm from "./flight-form";
+import FlightTable from "./flight-table";
 
 export default function AdminFlightsPage() {
   const [flights, setFlights] = useState<Vuelo[]>([]);
@@ -39,7 +40,7 @@ export default function AdminFlightsPage() {
       const response = await axiosInstance.get(`/vuelos/${searchId}`);
       setFlights(response.data ? [response.data] : []);
     } catch (error) {
-      console.error("Error fetching flight by ID:", error);
+      toast.error("Vuelo no encontrado");
     }
   };
 

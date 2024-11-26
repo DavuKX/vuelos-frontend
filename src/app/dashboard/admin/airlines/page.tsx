@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect, useState } from "react";
-import { Container, Typography, TextField, Button, Pagination } from "@mui/material";
-import axiosInstance from "@/services/axiosInstance";
-import AirlineTable from "./airline-table";
-import AirlineForm from "./airline-form"; 
 import { Aerolinea } from "@/interfaces/Aerolinea";
+import axiosInstance from "@/services/axiosInstance";
+import { Button, Container, Pagination, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import AirlineForm from "./airline-form";
+import AirlineTable from "./airline-table";
+import { toast } from "react-toastify";
 
 
 export default function AdminAirlinesPage() {
@@ -36,10 +37,12 @@ export default function AdminAirlinesPage() {
     }
 
     try {
-      const response = await axiosInstance.get(`/aerolineas/${searchId}`);
-      setAirlines(response.data ? [response.data] : []);
+      const response = await axiosInstance.get('/aerolineas/search', {
+        params: { param: searchId },
+      });
+      setAirlines(response.data ? response.data : []);
     } catch (error) {
-      console.error("Error fetching airline by ID:", error);
+      toast.error("Aerolínea no encontrada");
     }
   };
 
@@ -75,7 +78,7 @@ export default function AdminAirlinesPage() {
 
       <div className="flex gap-4 mb-4">
         <TextField
-          label="Buscar por ID"
+          label="Buscar"
           value={searchId}
           onChange={(e) => setSearchId(e.target.value)}
           color="secondary"

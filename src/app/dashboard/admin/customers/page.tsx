@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import axiosInstance from "@/services/axiosInstance";
-import { Button, TextField, Container, Typography, Pagination } from "@mui/material";
-import CustomerTable from "./customer-table";
-import CustomerForm from "./customer-form";
 import { Cliente } from "@/interfaces/Cliente";
+import axiosInstance from "@/services/axiosInstance";
+import { Button, Container, Pagination, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import CustomerForm from "./customer-form";
+import CustomerTable from "./customer-table";
 
 export default function AdminClientsPage() {
   const [clients, setClients] = useState<Cliente[]>([]);
@@ -39,7 +40,7 @@ export default function AdminClientsPage() {
       const response = await axiosInstance.get(`/clientes/documento/${searchDocument}`);
       setClients(response.data ? [response.data] : []);
     } catch (error) {
-      console.error("Error fetching client by document ID:", error);
+      toast.error("Cliente no encontrado");
     }
   };
 

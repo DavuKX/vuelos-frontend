@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import {Container,Typography,TextField,Button,Pagination} from '@mui/material';
-import axiosInstance from "@/services/axiosInstance";
-import AirportTable from "./airport-table";
-import AirportForm from "./airport-form";
 import { Aeropuerto } from '@/interfaces/Aeropuerto';
+import axiosInstance from "@/services/axiosInstance";
+import { Button, Container, Pagination, TextField, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import AirportForm from "./airport-form";
+import AirportTable from "./airport-table";
 
 export default function AdminAirportsPage() {
   const [airports, setAirports] = useState<Aeropuerto[]>([]);
@@ -35,10 +36,12 @@ export default function AdminAirportsPage() {
     }
 
     try {
-      const response = await axiosInstance.get(`/aeropuertos/${searchId}`);
-      setAirports(response.data ? [response.data] : []);
+      const response = await axiosInstance.get('/aeropuertos/search', {
+        params: { name: searchId }
+      });
+      setAirports(response.data ? response.data : []);
     } catch (error) {
-      console.error("Error fetching airport by ID:", error);
+      toast.error("Aeropuerto no encontrado");
     }
   };
 
@@ -74,7 +77,7 @@ export default function AdminAirportsPage() {
 
       <div className="flex gap-4 mb-4">
         <TextField
-          label="Buscar por ID"
+          label="Buscar"
           value={searchId}
           onChange={(e) => setSearchId(e.target.value)}
           color="secondary"
