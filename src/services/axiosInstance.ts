@@ -1,5 +1,6 @@
+import { getCookie } from "@/lib/cookieUtils";
 import axios from "axios";
-import { getCookie} from "@/lib/cookieUtils";
+import { redirect } from "next/navigation";
 
 const axiosInstance = axios.create({
     baseURL: "http://localhost:8080/api/v1/",
@@ -21,5 +22,16 @@ axiosInstance.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            redirect("/auth/login");
+        }
+        return Promise.reject(error);
+    }
+);
+
 
 export default axiosInstance;

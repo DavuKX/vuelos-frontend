@@ -6,6 +6,7 @@ import {
     PanelLeft,
     ShoppingCart,
 } from 'lucide-react';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import React from "react";
 import { NavItem } from './nav-item';
@@ -35,7 +36,8 @@ export default function DashboardLayout({
     );
 }
 
-function DesktopNav() {
+async function DesktopNav() {
+    const admin = (await cookies()).get('authRoles')?.value.includes('ROLE_ADMIN');
     return (
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
             <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
@@ -55,7 +57,8 @@ function DesktopNav() {
     );
 }
 
-function MobileNav() {
+async function MobileNav() {
+    const admin = (await cookies()).get('authRoles')?.value.includes('ROLE_ADMIN');
     return (
         <Sheet>
             <SheetTrigger asChild>
