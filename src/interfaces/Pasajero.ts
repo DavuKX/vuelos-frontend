@@ -3,5 +3,4 @@ export interface Pasajero {
     nombrePasajero: string;
     apellidoPasajero: string;
     documentoIdentidadPasajero: string;
-    reservaId: number;
 }

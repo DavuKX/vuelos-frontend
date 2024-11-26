@@ -22,7 +22,6 @@ interface PassengerFormData {
   nombrePasajero: string;
   apellidoPasajero: string;
   documentoIdentidadPasajero: string;
-  reservaId: number;
 }
 
 const PassengerForm = ({ passenger, onClose, onSubmit }: PassengerFormProps) => {
@@ -30,7 +29,6 @@ const PassengerForm = ({ passenger, onClose, onSubmit }: PassengerFormProps) => 
     nombrePasajero: passenger?.nombrePasajero || "",
     apellidoPasajero: passenger?.apellidoPasajero || "",
     documentoIdentidadPasajero: passenger?.documentoIdentidadPasajero || "",
-    reservaId: passenger?.reservaId || 0,
   });
 
   const handleChange = (field: keyof PassengerFormData) => (
